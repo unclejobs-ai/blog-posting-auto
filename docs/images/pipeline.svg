@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A877F"/>
+    </marker>
+    <style>
+      .box { fill: #FFFFFF; stroke: #1F1F1F; stroke-width: 1.5; }
+      .opt { fill: #FFFFFF; stroke: #D9480F; stroke-width: 1.5; }
+      .name { font: 700 20px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; fill: #1F1F1F; }
+      .role { font: 400 14px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; fill: #5C5A55; }
+      .file { font: 400 13px "SF Mono", Menlo, "DejaVu Sans Mono", monospace; fill: #6B6963; }
+      .num  { font: 600 13px "SF Mono", Menlo, "DejaVu Sans Mono", monospace; fill: #8A877F; }
+      .tag  { font: 700 14px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; fill: #D9480F; }
+      .line { fill: none; stroke: #8A877F; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="1200" height="420" fill="#FAFAF7"/>
+
+  <!-- row 1 -->
+  <g>
+    <rect class="box" x="30" y="40" width="196" height="88" rx="10"/>
+    <text class="num" x="46" y="64">1</text>
+    <text class="name" x="46" y="92">Researcher</text>
+    <text class="role" x="46" y="114">자료 조사</text>
+    <text class="file" x="30" y="154">research.md</text>
+
+    <rect class="box" x="266" y="40" width="196" height="88" rx="10"/>
+    <text class="num" x="282" y="64">1.5</text>
+    <text class="name" x="282" y="92">Fact-Checker</text>
+    <text class="role" x="282" y="114">원본 다시 열어 검증</text>
+    <text class="file" x="266" y="154">research.verified.md</text>
+
+    <rect class="box" x="502" y="40" width="196" height="88" rx="10"/>
+    <text class="num" x="518" y="64">2</text>
+    <text class="name" x="518" y="92">Planner</text>
+    <text class="role" x="518" y="114">글 구조 설계</text>
+    <text class="file" x="502" y="154">plan.md</text>
+
+    <rect class="box" x="738" y="40" width="196" height="88" rx="10"/>
+    <text class="num" x="754" y="64">3</text>
+    <text class="name" x="754" y="92">Writer</text>
+    <text class="role" x="754" y="114">본문 초안, 사진 자리 표시</text>
+    <text class="file" x="738" y="154">draft.md</text>
+
+    <rect class="box" x="974" y="40" width="196" height="88" rx="10"/>
+    <text class="num" x="990" y="64">4</text>
+    <text class="name" x="990" y="92">Reviewer</text>
+    <text class="role" x="990" y="114">톤·사실 게이트</text>
+    <text class="file" x="974" y="154">final.md</text>
+
+    <path class="line" d="M226,84 H264" marker-end="url(#a)"/>
+    <path class="line" d="M462,84 H500" marker-end="url(#a)"/>
+    <path class="line" d="M698,84 H736" marker-end="url(#a)"/>
+    <path class="line" d="M934,84 H972" marker-end="url(#a)"/>
+  </g>
+
+  <!-- return line -->
+  <path class="line" d="M1170,84 H1186 V196 H128 V264" marker-end="url(#a)"/>
+
+  <!-- optional image stage group -->
+  <rect x="16" y="222" width="460" height="176" rx="14" fill="none" stroke="#D9480F" stroke-width="1" stroke-dasharray="5 5"/>
+  <text class="tag" x="292" y="246">선택 · 이미지 단계</text>
+
+  <!-- row 2 -->
+  <g>
+    <rect class="opt" x="30" y="266" width="196" height="88" rx="10"/>
+    <text class="num" x="46" y="290">4.5</text>
+    <text class="name" x="46" y="318">Image Router</text>
+    <text class="role" x="46" y="340">사진 자리 → 프롬프트</text>
+    <text class="file" x="30" y="380">image-prompts.json</text>
+
+    <rect class="opt" x="266" y="266" width="196" height="88" rx="10"/>
+    <text class="num" x="282" y="290">4.6</text>
+    <text class="name" x="282" y="318">codex exec</text>
+    <text class="role" x="282" y="340">내장 image_gen, 1장씩</text>
+    <text class="file" x="266" y="380">images/ + manifest</text>
+
+    <rect class="box" x="738" y="266" width="196" height="88" rx="10"/>
+    <text class="num" x="754" y="290">5</text>
+    <text class="name" x="754" y="318">Publisher</text>
+    <text class="role" x="754" y="340">승인 후 발행</text>
+    <text class="file" x="738" y="380">Notion Draft</text>
+
+    <path class="line" d="M226,310 H264" marker-end="url(#a)"/>
+    <path class="line" d="M462,310 H736" marker-end="url(#a)"/>
+  </g>
+
+  <path class="line" d="M836,196 V264" marker-end="url(#a)"/>
+  <text class="role" x="848" y="236">이미지를 안 쓰면 바로 발행 단계로</text>
+</svg>
