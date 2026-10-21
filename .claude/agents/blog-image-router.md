@@ -52,7 +52,7 @@ Reviewer가 확정한 final.md에서 `📸 [설명]` placeholder를 찾아, 섹�
    - placeholder 설명 (Writer가 의도한 장면)
    - research.verified.md에서 그 섹션과 관련된 사실
 3. 섹션을 열어 주는 장면 하나로 프롬프트를 쓴다. 본문을 그림으로 다시 설명하지 않는다.
-4. image-prompts.json을 쓰고 `jq empty`로 파싱 확인.
+4. image-prompts.json을 쓴다. JSON 파싱 확인(`jq empty`)은 오케스트레이터가 한다.
 
 ## 규칙
 
@@ -64,7 +64,7 @@ Reviewer가 확정한 final.md에서 `📸 [설명]` placeholder를 찾아, 섹�
 
 ## 완료 조건
 
-`image-prompts.json` 존재 + `jq empty` 통과 + 항목 수와 생성 대상 placeholder 수가 같음. stdout 한 줄:
+`image-prompts.json`이 올바른 JSON 배열 + 항목 수와 생성 대상 placeholder 수가 같음. stdout 한 줄:
 
 ```
 [image-router] placeholders=N prompts=M skipped=K

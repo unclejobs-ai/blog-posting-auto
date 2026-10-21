@@ -22,7 +22,6 @@ RUN_ARG="${2:-}"
 [[ -n "$MODE" && -n "$RUN_ARG" ]] || die "usage: $0 generate|swap workspace/{RUN_ID}"
 [[ -d "$RUN_ARG" ]] || die "run 디렉토리가 없어요: $RUN_ARG"
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RUN_DIR="$(cd "$RUN_ARG" && pwd)"
 PROMPTS="$RUN_DIR/image-prompts.json"
 MANIFEST="$RUN_DIR/images.manifest.json"
@@ -77,7 +76,7 @@ EOF
     echo "[codex-images] ($i/$total) $filename 생성 중..."
     # 프롬프트는 stdin('-')으로 넘기고, 부모 stdin은 물려주지 않는다.
     codex exec \
-      -C "$REPO_ROOT" \
+      -C "$IMG_DIR" \
       -s workspace-write \
       -c 'sandbox_workspace_write.network_access=true' \
       --skip-git-repo-check \
@@ -117,10 +116,10 @@ swap() {
 
   local pairs="$LOG_DIR/swap-pairs.tsv"
   mkdir -p "$LOG_DIR"
-  # placeholder 줄 → 이미지 마크다운. alt는 placeholder의 [] 안쪽 설명.
+  # placeholder 줄 → 이미지 마크다운. alt는 "AI 생성 이미지: " + placeholder의 [] 안쪽 설명.
   jq -r '.images[] | select(.status == "generated") |
     [ .source_placeholder,
-      "![" + (.source_placeholder | capture("\\[(?<d>.*)\\]").d // .section_heading) + "](images/" + .filename + ")"
+      "![AI 생성 이미지: " + (.source_placeholder | capture("\\[(?<d>.*)\\]").d // .section_heading) + "](images/" + .filename + ")"
     ] | @tsv' "$MANIFEST" > "$pairs"
 
   awk -F'\t' '

@@ -132,6 +132,7 @@ scripts/codex-images.sh generate workspace/$RUN_ID < /dev/null
 
 - 항목 하나당 `codex exec` 1회, **한 번에 하나씩** 직렬 실행. 병렬 금지 (계정 사용량·속도 제한).
 - Codex 내장 `image_gen`이 ChatGPT 로그인(`codex login`)으로 생성. `OPENAI_API_KEY` 불필요.
+- codex 작업 폴더(`-C`)는 `images/`라서 샌드박스가 그 밖에는 못 쓴다.
 - 1장에 30초~수 분. Bash timeout을 넉넉히 (10분) 주거나 백그라운드로.
 - `codex exec`는 exit 0이어도 실패일 수 있다. 스크립트는 PNG 파일 존재·형식으로만 판정.
 
@@ -151,7 +152,7 @@ scripts/codex-images.sh generate workspace/$RUN_ID < /dev/null
 scripts/codex-images.sh swap workspace/$RUN_ID
 ```
 
-- `final.md`를 읽어 `final.images.md` 사본을 만든다. `status=generated`인 항목의 `source_placeholder` 줄을 `![설명](images/{filename})`로 **그 자리에서** 바꾼다. `failed` 항목의 placeholder는 남는다.
+- `final.md`를 읽어 `final.images.md` 사본을 만든다. `status=generated`인 항목의 `source_placeholder` 줄을 `![AI 생성 이미지: 설명](images/{filename})`로 **그 자리에서** 바꾼다. `failed` 항목의 placeholder는 남는다.
 - `final.md`는 수정하지 않는다 (핵심 규칙 1). Publisher는 계속 `final.md`를 발행한다.
 - Notion은 로컬 상대 경로 이미지를 읽지 못한다. 이미지는 Notion 페이지에 직접 올리거나, 상대 경로 이미지를 지원하는 다른 발행 타겟에서 `final.images.md`를 쓴다.
 

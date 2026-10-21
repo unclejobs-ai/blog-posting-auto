@@ -39,7 +39,7 @@ Reviewer 뒤에 이미지 단계를 선택으로 붙일 수 있어요. 글 안�
   ```bash
   codex login                                   # ChatGPT 계정으로 로그인
   codex login status                            # "Logged in using ChatGPT"
-  codex features list | rg image_generation     # stable  true
+  codex features list | grep image_generation   # stable  true
   ```
 
 ## 설치
@@ -101,7 +101,7 @@ scripts/codex-images.sh generate workspace/$RUN_ID < /dev/null
 
 결과는 `workspace/{RUN_ID}/images/*.png`와 `images.manifest.json`이에요. manifest 항목은 `section_heading`, `source_placeholder`, `prompt`, `negative_constraints`, `filename`, `status`(`generated` 또는 `failed`)를 가져요. 다른 모델을 쓰려면 `CODEX_IMAGE_MODEL`을 지정하세요. 비우면 `~/.codex/config.toml` 기본 모델을 써요.
 
-**`final.md`는 고치지 않아요.** 이미지를 확인한 뒤 `scripts/codex-images.sh swap workspace/$RUN_ID`를 실행하면 placeholder 줄을 `![설명](images/파일명.png)`로 바꾼 사본 `final.images.md`가 생겨요. 실패한 항목의 placeholder는 그대로 남아요. Notion은 로컬 이미지 경로를 읽지 못해서, Publisher는 지금처럼 `final.md`를 발행하고 이미지는 Notion 페이지에 직접 올려야 해요.
+**`final.md`는 고치지 않아요.** 이미지를 확인한 뒤 `scripts/codex-images.sh swap workspace/$RUN_ID`를 실행하면 placeholder 줄을 `![AI 생성 이미지: 설명](images/파일명.png)`로 바꾼 사본 `final.images.md`가 생겨요. 실패한 항목의 placeholder는 그대로 남아요. Notion은 로컬 이미지 경로를 읽지 못해서, Publisher는 지금처럼 `final.md`를 발행하고 이미지는 Notion 페이지에 직접 올려야 해요.
 
 이미지 한 장에 30초에서 몇 분이 걸리고, ChatGPT 계정 사용량을 써요.
 
