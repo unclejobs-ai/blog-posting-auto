@@ -4,7 +4,7 @@ Claude Code 기반 한국어 블로그 글 자동화 파이프라인. 주제 한
 
 ![파이프라인 구조: Researcher부터 Reviewer까지 5단계, 선택 이미지 단계(Image Router, codex exec), Publisher](docs/images/pipeline.png)
 
-Reviewer 뒤에 이미지 단계를 선택으로 붙일 수 있어요. 글 안의 `📸 [설명]` 자리마다 Codex CLI(`codex exec`)가 섹션 이미지를 한 장씩 만들어요. 자세한 내용은 [이미지 단계](#이미지-단계-선택)를 보세요.
+Reviewer 뒤에 이미지 단계를 선택으로 붙일 수 있다. 글 안의 `📸 [설명]` 자리마다 Codex CLI(`codex exec`)가 섹션 이미지를 한 장씩 만든다. 자세한 내용은 [이미지 단계](#이미지-단계-선택) 참고.
 
 ```
 사용자 입력 → Researcher → Fact-Checker → Planner → Writer → Reviewer → (Image Router → codex exec) → Publisher → Notion Draft
@@ -35,7 +35,7 @@ Reviewer 뒤에 이미지 단계를 선택으로 붙일 수 있어요. 글 안�
 - **Claude Code** (CLI 또는 IDE 확장) — `claude` 명령으로 세션 시작
 - **Notion MCP 연결** — `claude_ai_Notion` 글로벌 MCP 서버 설정 ([Anthropic Notion connector 가이드](https://docs.anthropic.com/) 참조)
 - **Notion DB 1개** — 글이 쌓일 데이터베이스. title 속성 1개만 있어도 동작 (기본 필드명 `이름`)
-- **이미지 단계를 쓸 때만**: Codex CLI와 `jq`. codex-cli 0.163.0에서 확인했어요. `OPENAI_API_KEY`는 필요 없어요.
+- **이미지 단계를 쓸 때만**: Codex CLI와 `jq`. codex-cli 0.163.0에서 확인했다. `OPENAI_API_KEY`는 필요 없다.
   ```bash
   codex login                                   # ChatGPT 계정으로 로그인
   codex login status                            # "Logged in using ChatGPT"
@@ -84,32 +84,32 @@ https://www.notion.so/your-workspace/My-DB-abcdef0123456789abcdef0123456789
 3. 최종 발행 직전 사용자에게 미리보기 1줄 보여주고 명시 OK 받기
 4. OK 받으면 Notion DB에 Draft 페이지 생성
 
-이미지까지 만들려면 `/blog-pipeline 부산 돼지국밥 맛집 후기 --images`처럼 요청하면 돼요.
+이미지까지 만들려면 `/blog-pipeline 부산 돼지국밥 맛집 후기 --images`처럼 요청하면 된다.
 
 발행 단계는 **항상 명시 승인 필요**. 자동 발행 금지 (외부 노출 작업은 사용자 확인 필수).
 
 ## 이미지 단계 (선택)
 
-Writer는 사진이 들어갈 자리에 `📸 [설명]`을 남겨요. Reviewer가 `final.md`를 확정한 뒤 두 단계가 이어져요.
+Writer는 사진이 들어갈 자리에 `📸 [설명]`을 남긴다. Reviewer가 `final.md`를 확정한 뒤 두 단계가 이어진다.
 
-1. **4.5 blog-image-router**: placeholder마다 섹션 제목과 본문, `research.verified.md`를 읽고 영어 프롬프트를 `image-prompts.json`에 써요. 간판·로고·글자·사람 얼굴·확인 안 된 디테일은 넣지 않아요.
-2. **4.6 `scripts/codex-images.sh generate`**: 항목마다 `codex exec`를 한 번씩, 한 번에 하나만 실행해요. Codex 내장 `image_gen`이 ChatGPT 로그인으로 이미지를 만들고, 스크립트는 PNG 파일이 실제로 생겼는지로 성공을 판정해요.
+1. **4.5 blog-image-router**: placeholder마다 섹션 제목과 본문, `research.verified.md`를 읽고 영어 프롬프트를 `image-prompts.json`에 쓴다. 간판·로고·글자·사람 얼굴·확인 안 된 디테일은 넣지 않는다.
+2. **4.6 `scripts/codex-images.sh generate`**: 항목마다 `codex exec`를 한 번씩, 한 번에 하나만 실행한다. Codex 내장 `image_gen`이 ChatGPT 로그인으로 이미지를 만들고, 스크립트는 PNG 파일이 실제로 생겼는지로 성공을 판정한다.
 
 ```bash
 scripts/codex-images.sh generate workspace/$RUN_ID < /dev/null
 ```
 
-결과는 `workspace/{RUN_ID}/images/*.png`와 `images.manifest.json`이에요. manifest 항목은 `section_heading`, `source_placeholder`, `prompt`, `negative_constraints`, `filename`, `status`(`generated` 또는 `failed`)를 가져요. 다른 모델을 쓰려면 `CODEX_IMAGE_MODEL`을 지정하세요. 비우면 `~/.codex/config.toml` 기본 모델을 써요.
+결과는 `workspace/{RUN_ID}/images/*.png`와 `images.manifest.json`이다. manifest 항목은 `section_heading`, `source_placeholder`, `prompt`, `negative_constraints`, `filename`, `status`(`generated` 또는 `failed`)를 가진다. 다른 모델을 쓰려면 `CODEX_IMAGE_MODEL`을 지정한다. 비우면 `~/.codex/config.toml` 기본 모델을 쓴다.
 
-**`final.md`는 고치지 않아요.** 이미지를 확인한 뒤 `scripts/codex-images.sh swap workspace/$RUN_ID`를 실행하면 placeholder 줄을 `![AI 생성 이미지: 설명](images/파일명.png)`로 바꾼 사본 `final.images.md`가 생겨요. 실패한 항목의 placeholder는 그대로 남아요. Notion은 로컬 이미지 경로를 읽지 못해서, Publisher는 지금처럼 `final.md`를 발행하고 이미지는 Notion 페이지에 직접 올려야 해요.
+**`final.md`는 고치지 않는다.** 이미지를 확인한 뒤 `scripts/codex-images.sh swap workspace/$RUN_ID`를 실행하면 placeholder 줄을 `![AI 생성 이미지: 설명](images/파일명.png)`로 바꾼 사본 `final.images.md`가 생긴다. 실패한 항목의 placeholder는 그대로 남는다. Notion은 로컬 이미지 경로를 읽지 못해서, Publisher는 지금처럼 `final.md`를 발행하고 이미지는 Notion 페이지에 직접 올려야 한다.
 
-이미지 한 장에 30초에서 몇 분이 걸리고, ChatGPT 계정 사용량을 써요.
+이미지 한 장에 30초에서 몇 분이 걸리고, ChatGPT 계정 사용량을 쓴다.
 
 | | |
 |---|---|
 | ![AI 생성 예시: 뚝배기 돼지국밥과 부추무침](docs/images/sample-section-gukbap-1.webp) | ![AI 생성 예시: 돼지국밥 한 상](docs/images/sample-section-gukbap-2.webp) |
 
-AI 생성 예시예요. 부산 돼지국밥 글의 섹션 placeholder로 Codex `image_gen`이 만든 일러스트이고, 글에 나온 실제 가게의 음식이나 매장 사진이 아니에요.
+AI 생성 예시. 부산 돼지국밥 글의 섹션 placeholder로 Codex `image_gen`이 만든 일러스트이고, 글에 나온 실제 가게의 음식이나 매장 사진이 아니다.
 
 ## 디렉토리 구조
 
@@ -172,7 +172,7 @@ AI 생성 예시예요. 부산 돼지국밥 글의 섹션 placeholder로 Codex `
 5. 모든 에이전트는 한국어 본문 작성. 영어 직역체·번역투 금지.
 6. Writer는 1인칭 경험담에도 측정 가능한 디테일(지명·거리·시간·가격·브랜드) 임의 추가 금지. verified에 있을 때만 구체값 사용.
 7. 모든 자료 조사·검증은 실행 날짜 기준. time-sensitive 사실은 출처 12개월 초과면 stale-source로 reject.
-8. 이미지 단계는 선택이에요. `final.md`는 그대로 두고, placeholder 교체는 `final.images.md` 사본에만 해요. 실존 가게 이미지는 AI 일러스트로만 만들고 그렇다고 밝혀요.
+8. 이미지 단계는 선택. `final.md`는 그대로 두고, placeholder 교체는 `final.images.md` 사본에만 한다. 실존 가게 이미지는 AI 일러스트로만 만들고 그렇다고 밝힌다.
 
 ## 디버깅
 
