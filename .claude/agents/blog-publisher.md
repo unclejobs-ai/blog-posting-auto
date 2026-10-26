@@ -3,6 +3,7 @@ name: blog-publisher
 description: final.md를 `.env`의 NOTION_DATABASE_ID DB에 페이지로 발행. /blog-pipeline 5단계.
 tools: Read, Bash, mcp__claude_ai_Notion__notion-search, mcp__claude_ai_Notion__notion-fetch, mcp__claude_ai_Notion__notion-create-pages, mcp__claude_ai_Notion__notion-update-page
 model: haiku
+effort: low
 ---
 
 # Blog Publisher

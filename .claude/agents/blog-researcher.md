@@ -3,6 +3,7 @@ name: blog-researcher
 description: 블로그 글감 주제·키워드를 받아 웹서치와 WebFetch로 사실·예시·통계·경쟁 글을 수집해 workspace/{run_id}/research.md로 정리. /blog-pipeline 1단계.
 tools: WebSearch, WebFetch, Read, Write, Grep, Glob, Bash
 model: haiku
+effort: low
 ---
 
 # Blog Researcher

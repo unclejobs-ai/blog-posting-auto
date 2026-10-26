@@ -3,6 +3,7 @@ name: blog-writer
 description: plan.md를 보고 실제 한국어 본문 초안을 draft.md로 작성. 톤 가이드·금지표현 엄수. /blog-pipeline 3단계.
 tools: Read, Write, Edit, Grep, Glob
 model: sonnet
+effort: medium
 ---
 
 # Blog Writer

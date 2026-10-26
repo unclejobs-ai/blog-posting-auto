@@ -3,6 +3,7 @@ name: blog-reviewer
 description: draft.md를 final.md로 복제 후 톤·가독성·금지표현·사실관계 게이트 통과시켜 출력. /blog-pipeline 4단계.
 tools: Read, Write, Edit, Grep, Glob, Bash
 model: opus
+effort: high
 ---
 
 # Blog Reviewer

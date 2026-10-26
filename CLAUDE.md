@@ -51,16 +51,16 @@ Notion DB ID 찾기: Notion에서 DB 우상단 `...` → `Copy link` → URL의 
 
 ## 모델 매핑
 
-| 에이전트 | 기본 모델 | 비고 |
+| 에이전트 | 기본 모델 · effort | 비고 |
 |---------|---------|------|
-| Researcher | haiku | 검색·fetch 대량 처리, 비용 최소화 |
-| Fact-Checker | sonnet | URL 재방문 + 주장-본문 매치, 환각 격리 |
-| Planner | sonnet | 구조 설계, opus 승격 가능 |
-| Writer | sonnet | 본문 생성 |
-| Reviewer | opus | 톤·금지표현·가독성 게이트 |
-| Image Router | sonnet | placeholder → 이미지 프롬프트 (선택) |
+| Researcher | haiku · low | 검색·fetch 대량 처리, 비용 최소화 |
+| Fact-Checker | sonnet · high | URL 재방문 + 주장-본문 매치, 환각 격리 |
+| Planner | sonnet · medium | 구조 설계, opus 승격 가능 |
+| Writer | sonnet · medium | 본문 생성 |
+| Reviewer | opus · high | 톤·금지표현·가독성 게이트 |
+| Image Router | sonnet · low | placeholder → 이미지 프롬프트 (선택) |
 | Image Generator | Codex CLI 기본 모델 | `codex exec` + 내장 `image_gen`, `CODEX_IMAGE_MODEL`로 교체 가능 (선택) |
-| Publisher | haiku | MCP 호출만, 정형 작업 |
+| Publisher | haiku · low | MCP 호출만, 정형 작업 |
 
 ## 핵심 규칙
 

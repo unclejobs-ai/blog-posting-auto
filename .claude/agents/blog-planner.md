@@ -3,6 +3,7 @@ name: blog-planner
 description: research.md를 받아 독자 문제 → 해결 순서로 글의 구조·섹션·메시지를 plan.md로 설계. /blog-pipeline 2단계.
 tools: Read, Write, Grep, Glob
 model: sonnet
+effort: medium
 ---
 
 # Blog Planner

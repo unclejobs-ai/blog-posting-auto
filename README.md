@@ -17,22 +17,22 @@ Reviewer 뒤에 이미지 단계를 선택으로 붙일 수 있다. 글 안의 `
 
 ## 6단계 구성
 
-| # | 에이전트 | 모델 | 입력 | 출력 |
+| # | 에이전트 | 모델 · effort | 입력 | 출력 |
 |---|---------|------|------|------|
-| 1 | blog-researcher | haiku | 주제 | `research.md` |
-| 1.5 | blog-fact-checker | sonnet | `research.md` | `research.verified.md`, `research.rejected.md` |
-| 2 | blog-planner | sonnet | `research.verified.md` | `plan.md` |
-| 3 | blog-writer | sonnet | `plan.md`, `research.verified.md` | `draft.md` |
-| 4 | blog-reviewer | opus | `draft.md` | `final.md` |
-| 4.5 | blog-image-router (선택) | sonnet | `final.md`, `research.verified.md` | `image-prompts.json` |
+| 1 | blog-researcher | haiku · low | 주제 | `research.md` |
+| 1.5 | blog-fact-checker | sonnet · high | `research.md` | `research.verified.md`, `research.rejected.md` |
+| 2 | blog-planner | sonnet · medium | `research.verified.md` | `plan.md` |
+| 3 | blog-writer | sonnet · medium | `plan.md`, `research.verified.md` | `draft.md` |
+| 4 | blog-reviewer | opus · high | `draft.md` | `final.md` |
+| 4.5 | blog-image-router (선택) | sonnet · low | `final.md`, `research.verified.md` | `image-prompts.json` |
 | 4.6 | `scripts/codex-images.sh` (선택) | Codex CLI 기본 모델 | `image-prompts.json` | `images/*.png`, `images.manifest.json` |
-| 5 | blog-publisher | haiku | `final.md` | Notion page URL |
+| 5 | blog-publisher | haiku · low | `final.md` | Notion page URL |
 
 각 단계 결과물은 `workspace/{RUN_ID}/`에 떨어지고 오케스트레이터가 단계별 검증을 책임진다. Fact-Checker verified 비율이 50% 미만이면 자동으로 Researcher를 다시 돌린다 (최대 2회).
 
 ## 사전 요구사항
 
-- **Claude Code** (CLI 또는 IDE 확장) — `claude` 명령으로 세션 시작
+- **Claude Code** v2.1.293 이상 (CLI 또는 IDE 확장) — `claude` 명령으로 세션 시작. 별칭 haiku · sonnet · opus가 Haiku 5.5 · Sonnet 5.5 · Opus 5.5로 풀리고, 에이전트별 `effort`를 읽는 버전
 - **Notion MCP 연결** — `claude_ai_Notion` 글로벌 MCP 서버 설정 ([Anthropic Notion connector 가이드](https://docs.anthropic.com/) 참조)
 - **Notion DB 1개** — 글이 쌓일 데이터베이스. title 속성 1개만 있어도 동작 (기본 필드명 `이름`)
 - **이미지 단계를 쓸 때만**: Codex CLI와 `jq`. codex-cli 0.163.0에서 확인했다. `OPENAI_API_KEY`는 필요 없다.
