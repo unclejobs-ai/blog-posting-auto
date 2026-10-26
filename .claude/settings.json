@@ -68,6 +68,7 @@
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(date:*)",
+      "Bash(scripts/codex-images.sh:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "mcp__claude_ai_Notion__notion-search",
