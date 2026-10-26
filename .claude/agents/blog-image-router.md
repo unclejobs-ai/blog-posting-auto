@@ -3,6 +3,7 @@ name: blog-image-router
 description: final.md의 📸 placeholder마다 섹션 맥락을 읽고 이미지 프롬프트를 image-prompts.json으로 정리. 이미지는 만들지 않음. /blog-pipeline 4.5단계 (선택).
 tools: Read, Write, Grep, Glob
 model: sonnet
+effort: low
 ---
 
 # Blog Image Router

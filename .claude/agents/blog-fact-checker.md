@@ -3,6 +3,7 @@ name: blog-fact-checker
 description: research.md의 각 주장을 원본 URL에 재방문해 검증, 매치 안 되는 사실 격리. workspace/{run_id}/research.verified.md + research.rejected.md 생성. /blog-pipeline 1.5단계.
 tools: Read, Write, WebFetch, WebSearch, Grep, Glob, Bash
 model: sonnet
+effort: high
 ---
 
 # Blog Fact-Checker
