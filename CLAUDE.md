@@ -67,6 +67,12 @@ Notion DB ID 찾기: Notion에서 DB 우상단 `...` → `Copy link` → URL의 
 8. **Fact-Checker verified 비율 < 50%면 Researcher 재실행 신호**. Planner 진입 금지.
 9. **모든 자료 조사·검증은 실행 날짜 기준** — 오케스트레이터가 `TODAY` 변수를 Researcher·Fact-Checker prompt에 전달. SessionStart + UserPromptSubmit hook이 컨텍스트에 날짜 자동 주입. Researcher는 쿼리에 최신성 키워드(`YEAR`, "최신") 강제, Fact-Checker는 time-sensitive 주장 출처 12개월 초과면 `stale-source` 카테고리로 reject.
 
+## 에이전트 작업 원칙
+
+- 시스템·개발자·사용자 요청이 이 파일과 스킬보다 우선합니다. 요청이 이어지면 현재 파이프라인의 남은 목적과 산출물을 보존하면서 그 변경을 반영합니다.
+- 사용자가 승인한 범위의 조사·검증·초안·검토는 중간 확인을 반복해서 요구하지 말고 끝까지 실행합니다. Notion 발행처럼 외부 상태를 바꾸는 단계는 위의 명시적 승인 규칙을 따릅니다.
+- 각 단계의 결과와 실패 원인을 확인한 뒤 다음 단계로 진행하고, 실행한 검증과 남은 제한을 보고합니다.
+
 ## 사용
 
 ```bash
